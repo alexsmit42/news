@@ -1,0 +1,26 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<div class='main'>
+
+      <div class='important'>
+        <p>Главное за неделю</p>
+
+        <div class='large-wrapper'>
+          <div class='large-block' style="background-image: url(/files/{{ mainArticle.id }}.jpg);">
+            <h2><a href='/article/{{ mainArticle.id }}'>{{ mainArticle.title }}</a></h2>
+          </div>
+          <ul>
+          {% for article in importantArticles %}
+            <li><a href='/article/{{ article.id }}'>{{ article.title }}</a></li>
+          {% endfor %}
+          </ul>
+        </div>
+
+      </div>
+
+      {% include 'article_list.twig' with {'articles': otherArticles} %}
+
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends './layout.twig' %}
+
+{% block content %}
+
+<div class='main-form'>
+    <form action='/admin/article' method='post' name='add-article' id='add-article' enctype="multipart/form-data">
+
+        <h2>{% if article.id %}Редактировать статью{% else %}Добавить статью{% endif %}</h2>
+
+        <label for='section'>Выберите рубрику</label>
+        <select id='section' name='section' class='section'>
+            {% for category in categories %}
+                <option value='{{ category.id }}' {% if category.id == article.category_id %} selected {% endif %}>
+                    {{ category.caption }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <div class='important-news'>
+            <input name='is_important' type='checkbox' id='important-news' 
+                value='Поместить в список главных новостей' {% if article.is_important %} checked {% endif %}>
+            <label for='important-news'>Поместить в список главных новостей</label>
+        </div>
+
+        <label for='date'>Выберите дату публикации</label>
+        <input name='date' type='date' id='date' value="{{ article.create_date }}">
+
+        <label for='title'>Введите название статьи</label>
+        <input name='title' type='text' id='title' value="{{ article.title }}">
+
+        <label for='preview'>Анонс</label>
+        <input name='preview' type='text' id='preview' value="{{ article.preview }}">
+
+        <label for='img'>Фото для статьи</label>
+        <input type='file' name='img'>
+
+        <label for='img_preview'>Фото для превью</label>
+        <input type='file' name='img_preview'>
+
+        <label for='content'>Введите текст</label>
+        <textarea class='content' name='content'>{{ article.content }}</textarea>
+
+        <div class='buttons-wrapper article-publish'>
+            <input type='hidden' name='type' >
+            <input type='hidden' name='id' value='{{ article.id | default(0) }}' >
+
+            <button id='publish'>Опубликовать</button>
+            <button id='draft'>Сохранить черновик</button>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

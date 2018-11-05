@@ -1,0 +1,47 @@
+{% extends './layout.twig' %}
+
+{% block content %}
+
+<div class='main-moderation'>
+
+    <h2>Комментарии</h2>
+
+    <p class='mod-comments counter'>Всего комментариев:<span>{{ newComments.length + confirmComments.length }}</span></p>
+    <p class='non-mod-comments counter'>Комментариев, ожидающих модерацию:<span>{{ newComments.length }}</span></p>
+
+    <div class='category expand'>
+        <h3>Комментарии для модерации</h3>
+        {% for comment in newComments %}
+        <div class='comment-block hidden-content'>
+            <a href='/article/{{ comment.article.id }}' target='_blank'>{{ comment.article.title }}</a>
+            <div class='comments'>
+                <div class='data-text'>
+                    <div class='username'>{{ comment.username }}</div>
+                    <div class='comment-date'>{{ comment.create_date }}</div>
+                    <div class='comment-text'>{{ comment.content }}</div>
+                </div>
+                <a href="/admin/comment/delete/{{ comment.id }}"><img id='delete' src='/images/delete.svg' title='Удалить' /></a>
+                <a href="/admin/comment/confirm/{{ comment.id }}"><img id='approve' src='/images/check-mark.svg' title='Утвердить' /></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class='category expand'>
+        <h3>Комментарии на сайте</h3>
+        {% for comment in confirmComments %}
+        <div class='comment-block hidden-content'>
+            <a href='/article/{{ comment.article.id }}' target='_blank'>{{ comment.article.title }}</a>
+            <div class='comments'>
+                <div class='data-text'>
+                    <div class='username'>{{ comment.username }}</div>
+                    <div class='comment-date'>{{ comment.create_date }}</div>
+                    <div class='comment-text'>{{ comment.content }}</div>
+                </div>
+                <a href="/admin/comment/delete/{{ comment.id }}"><img id='delete' src='/images/delete.svg' title='Удалить' /></a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

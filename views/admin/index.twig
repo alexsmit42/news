@@ -1,0 +1,31 @@
+{% extends './layout.twig' %}
+
+{% block content %}
+    <div class='main-published'>
+
+      <h2>Статьи</h2>
+
+      <p class='published counter'>Опубликованных статей:<span>{{ counts.publish }}</span></p>
+      <p class='drafts counter'>Черновиков:<span>{{ counts.archive }}</span></p>
+
+      {% for category in data %}
+      <div class='category expand'>
+        <h3>{{ category.caption }}</h3>
+
+        {% for article in category.articles %}
+        <div class='article-wrapper hidden-content'>
+          <p>{{ article.create_date }}</p>
+          {% if article.is_archive %}
+            <div id='draft'>Черновик</div>
+          {% endif %}
+          <a class="title" href='/article/{{ article.id }}' target="_blank">{{ article.title }}</a>
+          <a id='edit' href="/admin/article/{{ article.id }}"><img src='images/edit.svg' title='Редактировать' /></a>
+          <a id='delete' href="/admin/article/delete/{{ article.id }}"><img src='images/delete.svg' title='Удалить' /></a>
+        </div>
+        {% endfor %}
+
+      </div>
+      {% endfor %}
+
+    </div>
+{% endblock %}

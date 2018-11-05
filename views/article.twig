@@ -1,0 +1,56 @@
+{% extends 'layout.twig' %}
+
+{% block body %}
+<div class='main-article'>
+
+    <article>
+        <div class='section-name'>{{ category.caption }}</div>
+        <div class='date'>{{ article.create_date }}</div>
+        <h1>{{ article.title }}</h1>
+        <img src='/files/{{ article.id }}.jpg' />
+        <p>{{ article.content }}</p>
+
+        <div class='share'>Поделиться статьей:</div>
+        <div class='a2a_kit a2a_kit_size_32 a2a_default_style'>
+            <a class='a2a_dd' href='https://www.addtoany.com/share'></a>
+            <a class='a2a_button_vk'></a>
+            <a class='a2a_button_odnoklassniki'></a>
+            <a class='a2a_button_twitter'></a>
+            <a class='a2a_button_facebook'></a>
+            <a class='a2a_button_mail_ru'></a>
+        </div>
+        <script async src='https://static.addtoany.com/menu/page.js'></script>
+    </article>
+
+    <div class='expand' id='show-form'>
+        <h3>Добавить комментарий</h3>
+        <form action='/comment' method='post' id='comment-form' class='hidden-content'>
+            <input id='name'
+                    name='username'
+                    type='text'
+                    placeholder='Имя'
+                    value aria-label='Имя'
+                    class='required'/>
+            <textarea class='comment'
+                    name='content'
+                    placeholder='Ваше сообщение'
+                    aria-label='Ваше сообщение'></textarea>
+            <input type='hidden' name='article_id' value='{{ article.id }}' />
+            <button id='submit' type='submit' value='submit'>Отправить</button>
+        </form>
+    </div>
+
+    <h3>Комментарии: {{ comments.length }}</h3>
+    {% for comment in comments %}
+    <div class='comments'>
+        <img src='/images/cat.svg' />
+        <div class='data-text'>
+            <div class='username'>{{ comment.username }}</div>
+            <div class='comment-date'>{{ comment.create_date }}</div>
+            <div class='comment-text'>{{ comment.content }}</div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock %}

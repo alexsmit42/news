@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang='ru'>
+
+<head>
+
+  <title>Курьёзные новости</title>
+
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+
+  <link rel='shortcut icon' href='/images/horse-128.png' type='image/png'>
+  <link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700&amp;subset=cyrillic,cyrillic-ext' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,400i,700&amp;subset=cyrillic-ext' rel='stylesheet'>
+  <link href='https://fonts.googleapis.com/css?family=Neucha' rel='stylesheet'>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' />
+  <link href='/css/jquery-ui.min.css' rel='stylesheet' />
+  <link href='/css/styles.min.css' rel='stylesheet'>
+
+  <script src='https://code.jquery.com/jquery-3.3.1.min.js' integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=' crossorigin='anonymous'></script>
+  <script src='/js/jquery-ui.min.js'></script>
+  <script src='/js/script.js'></script>
+
+</head>
+
+<body>
+
+  <div id='wrap'>
+
+    <header>
+      <div class='top-panel'>
+        <div class='logo'>
+          <a href='/'><img src='/images/horse.svg' alt='Логотип' /></a>
+          <p><a href='/'>Курьёзные новости из&nbsp;Брянской области</a></p>
+        </div>
+        <div class='social'>
+          <a href=''><img src='/images/social/vk-0.svg' /></a>
+          <a href=''><img src='/images/social/odnoklassniki-0.svg' /></a>
+          <a href=''><img src='/images/social/facebook-0.svg' /></a>
+          <a href=''><img src='/images/social/twitter-0.svg' /></a>
+        </div>
+      </div>
+
+      <nav>
+        <ul>
+          {% for category in categories %}
+            <li><a href='/{{ category.url }}' {% if category.id == currentCategory.id %}class="active"{% endif %} >{{ category.caption }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+
+    </header>
+
+    {% block body %}{% endblock %}
+
+  <footer>
+    <p>2018 &copy; ООО &laquo;Курьёзные новости&raquo;</p>
+    <img src='/images/key.svg' alt='Вход' />
+    <a>Войти на сайт</a>
+  </footer>
+
+  <div id='login' title='Войти на сайт'>
+    <p>
+      <form action="/login" method="post">
+        <input id='email' name='email' type='text' placeholder='Email' value aria-label='Email' />
+        <input id='password' name='password' type='password' placeholder='Пароль' value aria-label='Пароль' />
+      </form>
+    </p>
+  </div>
+
+</body>
+
+</html>
+
