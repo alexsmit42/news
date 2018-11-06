@@ -56,4 +56,82 @@ $(document).ready(function() {
     } // end buttons
   }); // end dialog
 
+  // проверка формы add-articles
+ $('#add-article').validate({
+   rules: {
+     section: {
+       required: true
+     },
+     editorial: {
+       required: false
+     },
+     importantnews: {
+       required: false
+     },
+     date: {
+       required: true
+     },
+     title: {
+       required: true
+     },
+     img: {
+       required: true
+     },
+     content: {
+       required: true
+     }
+   }, // end rules
+   messages: {
+     section: {
+       required: 'Это поле обязательно для заполнения'
+     },
+     date: {
+       required: 'Это поле обязательно для заполнения'
+     },
+     title: {
+       required: 'Это поле обязательно для заполнения'
+     },
+     img: {
+       required: 'Загрузите фото'
+     },
+     content: {
+       required: 'Это поле обязательно для заполнения'
+     }
+   }, // end messages
+   errorPlacement: function(error, element) {
+     if (element.is(':radio') || element.is(':checkbox')) {
+       error.appendTo(element.parent());
+     } else {
+       error.insertBefore(element);
+     }
+   } // end errorPlacement
+ }); // end validate
+
+ // проверка формы comment-form
+ $('#comment-form').validate({
+   rules: {
+     name: {
+       required: true
+     },
+     comment: {
+       required: true
+     }
+   },
+   messages: {
+     name: {
+       required: 'Это поле обязательно для заполнения'
+     },
+     comment: {
+       required: 'Это поле обязательно для заполнения'
+     }
+   },
+   errorPlacement: function(error, element) {
+     if (element.is(':radio') || element.is(':checkbox')) {
+       error.appendTo(element.parent());
+     } else {
+       error.insertBefore(element);
+     }
+   } // end errorPlacement
+ }); // end validate
+
 }); // end ready
